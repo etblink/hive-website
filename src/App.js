@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
 import { getUserAccount, getUserPosts, fetchBlogPosts } from './hive';
+import BlogPostPage from './BlogPostPage';
 import './styles.css';
 
 function App() {
@@ -8,7 +10,7 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const username = 'etblink'; // Replace this with your Hive username
+      const username = 'etblink';
       const accountData = await getUserAccount(username);
       const postData = await fetchBlogPosts(username);
 
@@ -22,20 +24,32 @@ function App() {
   return (
     <div>
       <h1>Welcome to Evan Kotler's Hive Blockchain Frontend</h1>
-      {account && (
-        <div>
-          <h2>Account Details</h2>
-          <p>Username: {account.name}</p>
-          <p>Reputation: {account.reputation}</p>
-          <p>Balance: {account.balance}</p>
-        </div>
-      )}
-      <div>
-        <h2>Recent Posts</h2>
-        {posts.map((post) => (
-          <BlogPost key={post.permlink} post={post} />
-        ))}
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                {account && (
+                  <div>
+                    <h2>Account Details</h2>
+                    <p>Username: {account.name}</p>
+                    <p>Reputation: {account.reputation}</p>
+                    <p>Balance: {account.balance}</p>
+                  </div>
+                )}
+                <div>
+                  <h2>Recent Posts</h2>
+                  {posts.map((post) => (
+                    <BlogPost key={post.permlink} post={post} />
+                  ))}
+                </div>
+              </>
+            }
+          />
+          <Route path="/post/:author/:permlink" element={<BlogPostPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
@@ -45,10 +59,9 @@ function BlogPost({ post }) {
     <div>
       <h2>{post.title}</h2>
       <p>{post.summary}</p>
-      <a href={`https://hive.blog/@${post.author}/${post.permlink}`} target="_blank" rel="noreferrer">
+      <Link to={`/post/${post.author}/${post.permlink}`}>
         Read more
-      </a>
-      {/* Add more details and styling as needed */}
+      </Link>
     </div>
   );
 }

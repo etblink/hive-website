@@ -35,3 +35,12 @@ export async function fetchBlogPosts(username, limit = 10) {
     return [];
   }
 }
+
+export async function getPost(author, permlink) {
+  try {
+    const post = await client.database.call('get_content', [author, permlink]);
+    return post;
+  } catch (error) {
+    console.error('Error fetching post:', error);
+  }
+}
