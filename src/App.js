@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getUserAccount, getUserPosts } from './hive';
+import { getUserAccount, getUserPosts, fetchBlogPosts } from './hive';
 import './styles.css';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     async function fetchData() {
       const username = 'etblink'; // Replace this with your Hive username
       const accountData = await getUserAccount(username);
-      const postData = await getUserPosts(username);
+      const postData = await fetchBlogPosts(username);
 
       setAccount(accountData);
       setPosts(postData);
@@ -32,16 +32,23 @@ function App() {
       )}
       <div>
         <h2>Recent Posts</h2>
-        <ul>
-          {posts.map((post) => (
-            <li key={post.permlink}>
-              <a href={`https://hive.blog/@${post.author}/${post.permlink}`} target="_blank" rel="noreferrer">
-                {post.title}
-              </a>
-            </li>
-          ))}
-        </ul>
+        {posts.map((post) => (
+          <BlogPost key={post.permlink} post={post} />
+        ))}
       </div>
+    </div>
+  );
+}
+
+function BlogPost({ post }) {
+  return (
+    <div>
+      <h2>{post.title}</h2>
+      <p>{post.summary}</p>
+      <a href={`https://hive.blog/@${post.author}/${post.permlink}`} target="_blank" rel="noreferrer">
+        Read more
+      </a>
+      {/* Add more details and styling as needed */}
     </div>
   );
 }

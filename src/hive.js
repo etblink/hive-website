@@ -1,4 +1,4 @@
-import { Client, PrivateKey, cryptoUtils } from '@hiveio/dhive';
+import { Client, DatabaseAPI } from '@hiveio/dhive';
 
 // Initialize the Hive client
 const client = new Client('https://api.hive.blog');
@@ -21,6 +21,17 @@ export async function getUserPosts(username, limit = 5) {
     return posts;
   } catch (error) {
     console.error('Error fetching user posts:', error);
+    return [];
+  }
+}
+
+export async function fetchBlogPosts(username, limit = 10) {
+  const db = new DatabaseAPI(client);
+  try {
+    const posts = await db.getDiscussions('blog', { tag: username, limit });
+    return posts;
+  } catch (error) {
+    console.error('Error fetching blog posts:', error);
     return [];
   }
 }
