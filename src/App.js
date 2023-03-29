@@ -46,9 +46,6 @@ function App() {
                   />
                 </div>
                   <div className="posts-container app__posts-container">
-                    <h2 className="posts-title app__posts-title">
-                      <big>Recent Posts</big>
-                    </h2>
                     <div className="post-items app__post-items">
                       {recentPosts.map((post) => (
                         <BlogPost key={post.permlink} post={post} />
