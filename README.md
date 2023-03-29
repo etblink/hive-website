@@ -54,7 +54,7 @@ You can customize the app by changing the `username` variable in the `App.js` fi
 const username = 'your-hive-username';
 ```
 
-#License
+# License
 This project is open source and available under the MIT License.
 
 
