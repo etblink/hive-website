@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getPost } from './hive';
 import { useParams } from 'react-router-dom';
+import './styles.css';
 
 function BlogPostPage({ match }) {
   const { author, permlink } = useParams();
@@ -44,12 +45,12 @@ function BlogPostPage({ match }) {
   };
 
   return (
-    <div>
+    <div className="blog-post-container">
       {post ? (
         <>
-          <h1>{post.title}</h1>
-          <p>By {post.author}</p>
-          <div dangerouslySetInnerHTML={renderPostContent()} />
+          <h1 className="blog-post-title">{post.title}</h1>
+          <p className="blog-post-author">By {post.author}</p>
+          <div className="blog-post-content" dangerouslySetInnerHTML={renderPostContent()} />
         </>
       ) : (
         <p>Loading...</p>

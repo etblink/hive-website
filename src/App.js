@@ -33,18 +33,18 @@ function App() {
           <span> | </span>
           <Link to="/account">Account Details</Link>
         </nav>
-        <div className="img-container">
-          <img
-            src="https://images.pexels.com/photos/811838/pexels-photo-811838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            alt=""
-          />
-        </div>
-        <div className="app-container">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <div className="img-container">
+                  <img
+                    src="https://images.pexels.com/photos/811838/pexels-photo-811838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                    alt=""
+                  />
+                </div>
+                <div className="app-container">
                   <Sidebar posts={allPosts} />
                   <div className="posts-container">
                     <h2 className="posts-title">
@@ -56,13 +56,13 @@ function App() {
                       ))}
                     </div>
                   </div>
-                </>
-              }
-            />
-            <Route path="/account" element={<AccountDetails account={account} />} />
-            <Route path="/post/:author/:permlink" element={<BlogPostPage />} />
-          </Routes>
-        </div>
+                </div>
+              </>
+            }
+          />
+          <Route path="/account" element={<AccountDetails account={account} />} />
+          <Route path="/post/:author/:permlink" element={<BlogPostPage />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );
