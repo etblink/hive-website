@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import showdown from 'showdown';
 import { getPost } from './hive';
 import { useParams } from 'react-router-dom';
+import DOMPurify from 'dompurify';
+
 import './styles.css';
 
 function BlogPostPage({ match }) {
@@ -19,12 +22,12 @@ function BlogPostPage({ match }) {
   const renderPostContent = () => {
     const converter = new showdown.Converter();
     const htmlContent = converter.makeHtml(post.body);
-
+  
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlContent, 'text/html');
-
+  
     const baseUrl = 'https://images.hive.blog/';
-
+  
     const images = doc.querySelectorAll('img');
     images.forEach((img) => {
       const imgUrl = img.getAttribute('src');
@@ -32,7 +35,7 @@ function BlogPostPage({ match }) {
         img.setAttribute('src', baseUrl + imgUrl);
       }
     });
-
+  
     const links = doc.querySelectorAll('a');
     links.forEach((link) => {
       const linkUrl = link.getAttribute('href');
@@ -40,9 +43,13 @@ function BlogPostPage({ match }) {
         link.setAttribute('href', baseUrl + linkUrl);
       }
     });
-
-    return { __html: doc.body.innerHTML };
+  
+    // Sanitize the HTML content using DOMPurify
+    const sanitizedHtml = DOMPurify.sanitize(doc.body.innerHTML);
+  
+    return { __html: sanitizedHtml };
   };
+  
 
   return (
     <div className="blog-post-page">
