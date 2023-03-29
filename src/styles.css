@@ -61,20 +61,20 @@
   .posts-container {
     width: 100%;
     max-width: 700px;
-  }
-  
-  .posts-title {
+}
+
+.posts-title {
     text-align: center;
     margin-bottom: 30px;
-  }
-  
-  .post-items {
+}
+
+.post-items {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
-  }
-  
-  .blog-post {
+}
+
+.blog-post {
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -110,33 +110,6 @@
   .account-details__title {
     text-align: center;
     margin-bottom: 30px;
-  }
-  
-  .sidebar {
-    width: 100%;
-    max-width: 300px;
-  }
-  
-  .sidebar__title {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .sidebar__list {
-    list-style: none;
-  }
-  
-  .sidebar__list-item {
-    margin-bottom: 10px;
-  }
-  
-  .sidebar__list-item a {
-    color: #333;
-    text-decoration: none;
-  }
-  
-  .sidebar__list-item a:hover {
-    text-decoration: underline;
   }
   
   @media (max-width: 768px) {
