@@ -22,23 +22,27 @@ ETBlink's Blog is a simple web app built using React that demonstrates how to fe
 
 1. Clone the repository:
 
+```javascript
 git clone https://github.com/yourusername/etblink-blog.git
-
+```
 
 2. Navigate to the project directory:
 
+```javascript
 cd etblink-blog
-
+```
 
 3. Install the required dependencies:
 
+```javascript
 npm install
-
+```
 
 4. Start the development server:
 
+```javascript
 npm start
-
+```
 
 The app will run on `http://localhost:3000`.
 
@@ -48,6 +52,7 @@ You can customize the app by changing the `username` variable in the `App.js` fi
 
 ```javascript
 const username = 'your-hive-username';
+```
 
 #License
 This project is open source and available under the MIT License.
