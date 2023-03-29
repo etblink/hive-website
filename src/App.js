@@ -1,19 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { BrowserRouter, Route, Link, Routes } from "react-router-dom";
-import { getUserAccount, fetchRecent3Posts, fetchBlogPosts } from "./hive";
+import { getUserAccount, fetchBlogPosts } from "./hive";
 import BlogPostPage from "./BlogPostPage";
+import AccountDetails from "./components/AccountDetails";
+import BlogPost from "./components/BlogPost";
+import getFirstImageUrl from "./utils/getFirstImageUrl";
 import "./styles.css";
-
-function getFirstImageUrl(content) {
-  const imgRegex = /<img[^>]+src="?([^"\s]+)"?\s*\/>/g;
-  const match = imgRegex.exec(content);
-
-  if (match && match[1]) {
-    return match[1];
-  }
-
-  return null;
-}
 
 function App() {
   const [account, setAccount] = useState(null);
@@ -24,7 +16,7 @@ function App() {
     async function fetchData() {
       const username = "etblink";
       const accountData = await getUserAccount(username);
-      const recentPostData = await fetchRecent3Posts(username);
+      const recentPostData = await fetchBlogPosts(username, 9);
       const allPostData = await fetchBlogPosts(username);
 
       // Add imageUrl to each post object
@@ -59,12 +51,6 @@ function App() {
               path="/"
               element={
                 <>
-                  {/* <div className="img-container">
-                  <img
-                    src="https://images.pexels.com/photos/811838/pexels-photo-811838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    alt=""
-                  />
-                </div> */}
                   <div className="posts-container app__posts-container">
                     <div className="post-items app__post-items">
                       {recentPosts.map((post, index) => (
@@ -87,50 +73,6 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
-    </div>
-  );
-}
-
-function AccountDetails({ account }) {
-  if (!account) {
-    return <p>Loading account details...</p>;
-  }
-
-  return (
-    <div className="account-details">
-      <h2 className="account-details__title">Account Details</h2>
-      <p>Username: {account.name}</p>
-      <p>Reputation: {account.reputation}</p>
-      <p>Balance: {account.balance}</p>
-    </div>
-  );
-}
-
-function truncateTitle(title, maxLength = 20) {
-  if (title.length > maxLength) {
-    return title.slice(0, maxLength) + "...";
-  }
-  return title;
-}
-
-function BlogPost({ post, index }) {
-  const maxLength = index === 0 ? 40 : 20;
-  const backgroundImageStyle = post.imageUrl
-    ? { backgroundImage: `url(${post.imageUrl})` }
-    : {};
-
-  return (
-    <div className="blog-post" style={backgroundImageStyle}>
-      <h2 className="blog-post__title">
-        {truncateTitle(post.title, maxLength)}
-      </h2>
-      <p className="blog-post__summary">{post.summary}</p>
-      <Link
-        to={`/post/${post.author}/${post.permlink}`}
-        className="blog-post__link"
-      >
-        Read more
-      </Link>
     </div>
   );
 }
