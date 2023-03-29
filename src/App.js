@@ -4,6 +4,17 @@ import { getUserAccount, fetchRecent3Posts, fetchBlogPosts } from './hive';
 import BlogPostPage from './BlogPostPage';
 import './styles.css';
 
+function getFirstImageUrl(content) {
+  const imgRegex = /<img[^>]+src="?([^"\s]+)"?\s*\/>/g;
+  const match = imgRegex.exec(content);
+
+  if (match && match[1]) {
+    return match[1];
+  }
+
+  return null;
+}
+
 function App() {
   const [account, setAccount] = useState(null);
   const [recentPosts, setRecentPosts] = useState([]);
@@ -15,12 +26,21 @@ function App() {
       const accountData = await getUserAccount(username);
       const recentPostData = await fetchRecent3Posts(username);
       const allPostData = await fetchBlogPosts(username);
-
+  
+      // Add imageUrl to each post object
+      recentPostData.forEach((post) => {
+        post.imageUrl = getFirstImageUrl(post.body);
+      });
+  
+      allPostData.forEach((post) => {
+        post.imageUrl = getFirstImageUrl(post.body);
+      });
+  
       setAccount(accountData);
       setRecentPosts(recentPostData);
       setAllPosts(allPostData);
     }
-
+  
     fetchData();
   }, []);
 
@@ -87,8 +107,12 @@ function truncateTitle(title, maxLength = 40) {
 }
 
 function BlogPost({ post }) {
+  const backgroundImageStyle = post.imageUrl
+    ? { backgroundImage: `url(${post.imageUrl})` }
+    : {};
+
   return (
-    <div className="blog-post">
+    <div className="blog-post" style={backgroundImageStyle}>
       <h2 className="blog-post__title">{truncateTitle(post.title)}</h2>
       <p className="blog-post__summary">{post.summary}</p>
       <Link to={`/post/${post.author}/${post.permlink}`} className="blog-post__link">
