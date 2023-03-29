@@ -45,12 +45,12 @@ function BlogPostPage({ match }) {
   };
 
   return (
-    <div className="blog-post-container">
+    <div className="blog-post-page">
       {post ? (
         <>
-          <h1 className="blog-post-title">{post.title}</h1>
-          <p className="blog-post-author">By {post.author}</p>
-          <div className="blog-post-content" dangerouslySetInnerHTML={renderPostContent()} />
+          <h1 className="blog-post-page__title">{post.title}</h1>
+          <p className="blog-post-page__author">By {post.author}</p>
+          <div className="blog-post-page__content" dangerouslySetInnerHTML={renderPostContent()} />
         </>
       ) : (
         <p>Loading...</p>
