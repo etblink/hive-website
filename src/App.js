@@ -79,7 +79,7 @@ function AccountDetails({ account }) {
   );
 }
 
-function truncateTitle(title, maxLength = 25) {
+function truncateTitle(title, maxLength = 40) {
   if (title.length > maxLength) {
     return title.slice(0, maxLength) + '...';
   }
