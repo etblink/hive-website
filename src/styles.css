@@ -7,3 +7,12 @@ body {
 h1 {
     text-align: center;
 }
+
+nav {
+    text-align: center;
+}
+
+.recent-posts {
+    width: clamp(200px, 40%, 800px);
+    margin: 100px auto;
+}

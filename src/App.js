@@ -13,13 +13,17 @@ function App() {
       const username = 'etblink';
       const accountData = await getUserAccount(username);
       const postData = await fetchBlogPosts(username);
-
+  
+      // Filter posts authored by 'etblink'
+      const etblinkPosts = postData.filter(post => post.author === username);
+  
       setAccount(accountData);
-      setPosts(postData);
+      setPosts(etblinkPosts);
     }
-
+  
     fetchData();
   }, []);
+  
 
   return (
     <div>
@@ -35,7 +39,7 @@ function App() {
             path="/"
             element={
               <>
-                <div>
+                <div class="recent-posts">
                   <h2>Recent Posts</h2>
                   {posts.map((post) => (
                     <BlogPost key={post.permlink} post={post} />
