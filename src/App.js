@@ -98,10 +98,17 @@ function AccountDetails({ account }) {
   );
 }
 
+function truncateTitle(title, maxLength = 40) {
+  if (title.length > maxLength) {
+    return title.slice(0, maxLength) + '...';
+  }
+  return title;
+}
+
 function BlogPost({ post }) {
   return (
     <div>
-      <h2>{post.title}</h2>
+      <h2>{truncateTitle(post.title)}</h2>
       <p>{post.summary}</p>
       <Link to={`/post/${post.author}/${post.permlink}`}>
         Read more
@@ -109,6 +116,7 @@ function BlogPost({ post }) {
     </div>
   );
 }
+
 
 export default App;
 
