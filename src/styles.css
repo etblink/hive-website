@@ -12,7 +12,29 @@ nav {
     text-align: center;
 }
 
-.recent-posts {
+.post-items {
     width: clamp(200px, 40%, 800px);
-    margin: 100px auto;
+    margin: 0 auto;
+    display: flex;
+}
+
+.posts-title {
+    text-align: center;
+}
+
+img {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+}
+
+.img-container {
+    width: clamp(200px, 40%, 800px);
+    margin: 20px auto;
+}
+
+.sidebar {
+    position: absolute;
+    top: 100px;
+    right: -225px;
 }

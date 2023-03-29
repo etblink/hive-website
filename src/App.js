@@ -1,29 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
-import { getUserAccount, getUserPosts, fetchBlogPosts } from './hive';
+import { getUserAccount, fetchRecent3Posts, fetchBlogPosts } from './hive';
 import BlogPostPage from './BlogPostPage';
 import './styles.css';
 
 function App() {
   const [account, setAccount] = useState(null);
-  const [posts, setPosts] = useState([]);
+  const [recentPosts, setRecentPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       const username = 'etblink';
       const accountData = await getUserAccount(username);
-      const postData = await fetchBlogPosts(username);
-  
-      // Filter posts authored by 'etblink'
-      const etblinkPosts = postData.filter(post => post.author === username);
-  
+      const recentPostData = await fetchRecent3Posts(username);
+      const allPostData = await fetchBlogPosts(username);
+
       setAccount(accountData);
-      setPosts(etblinkPosts);
+      setRecentPosts(recentPostData);
+      setAllPosts(allPostData);
     }
-  
+
     fetchData();
   }, []);
-  
 
   return (
     <div>
@@ -34,24 +33,52 @@ function App() {
           <span> | </span>
           <Link to="/account">Account Details</Link>
         </nav>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <div class="recent-posts">
-                  <h2>Recent Posts</h2>
-                  {posts.map((post) => (
-                    <BlogPost key={post.permlink} post={post} />
-                  ))}
-                </div>
-              </>
-            }
+        <div className="img-container">
+          <img
+            src="https://images.pexels.com/photos/811838/pexels-photo-811838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            alt=""
           />
-          <Route path="/account" element={<AccountDetails account={account} />} />
-          <Route path="/post/:author/:permlink" element={<BlogPostPage />} />
-        </Routes>
+        </div>
+        <div className="app-container">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Sidebar posts={allPosts} />
+                  <div className="posts-container">
+                    <h2 className="posts-title">
+                      <big>Recent Posts</big>
+                    </h2>
+                    <div className="post-items">
+                      {recentPosts.map((post) => (
+                        <BlogPost key={post.permlink} post={post} />
+                      ))}
+                    </div>
+                  </div>
+                </>
+              }
+            />
+            <Route path="/account" element={<AccountDetails account={account} />} />
+            <Route path="/post/:author/:permlink" element={<BlogPostPage />} />
+          </Routes>
+        </div>
       </BrowserRouter>
+    </div>
+  );
+}
+
+function Sidebar({ posts }) {
+  return (
+    <div className="sidebar">
+      <h2>All Posts</h2>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.permlink}>
+            <Link to={`/post/${post.author}/${post.permlink}`}>{post.title}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -84,3 +111,4 @@ function BlogPost({ post }) {
 }
 
 export default App;
+

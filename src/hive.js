@@ -14,18 +14,7 @@ export async function getUserAccount(username) {
   }
 }
 
-// Function to fetch user's recent posts
-export async function getUserPosts(username, limit = 5) {
-  try {
-    const posts = await client.database.getDiscussions('blog', { tag: username, limit });
-    return posts;
-  } catch (error) {
-    console.error('Error fetching user posts:', error);
-    return [];
-  }
-}
-
-export async function fetchBlogPosts(username, limit = 10) {
+export async function fetchRecent3Posts(username, limit = 3) {
   const db = new DatabaseAPI(client);
   try {
     const posts = await db.getDiscussions('blog', { tag: username, limit });
@@ -34,6 +23,32 @@ export async function fetchBlogPosts(username, limit = 10) {
     console.error('Error fetching blog posts:', error);
     return [];
   }
+}
+
+export async function fetchBlogPosts(username) {
+  let startAuthor = '';
+  let startPermlink = '';
+  let posts = [];
+
+  while (true) {
+    const results = await client.database.getDiscussions('blog', {
+      tag: username,
+      limit: 100,
+      start_author: startAuthor,
+      start_permlink: startPermlink,
+    });
+
+    if (!results.length) {
+      break;
+    }
+
+    posts = posts.concat(results);
+
+    startAuthor = results[results.length - 1].author;
+    startPermlink = results[results.length - 1].permlink;
+  }
+
+  return posts;
 }
 
 export async function getPost(author, permlink) {
