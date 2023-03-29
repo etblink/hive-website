@@ -59,12 +59,12 @@ function App() {
               path="/"
               element={
                 <>
-                <div className="img-container">
+                {/* <div className="img-container">
                   <img
                     src="https://images.pexels.com/photos/811838/pexels-photo-811838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                     alt=""
                   />
-                </div>
+                </div> */}
                   <div className="posts-container app__posts-container">
                     <div className="post-items app__post-items">
                       {recentPosts.map((post) => (
@@ -99,7 +99,7 @@ function AccountDetails({ account }) {
   );
 }
 
-function truncateTitle(title, maxLength = 40) {
+function truncateTitle(title, maxLength = 20) {
   if (title.length > maxLength) {
     return title.slice(0, maxLength) + '...';
   }
