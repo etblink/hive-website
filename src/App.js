@@ -23,21 +23,18 @@ function App() {
 
   return (
     <div>
-      <h1>Welcome to Evan Kotler's Hive Blockchain Frontend</h1>
+      <h1>Welcome to ETBlink's Blog</h1>
       <BrowserRouter>
+        <nav>
+          <Link to="/">Home</Link>
+          <span> | </span>
+          <Link to="/account">Account Details</Link>
+        </nav>
         <Routes>
           <Route
             path="/"
             element={
               <>
-                {account && (
-                  <div>
-                    <h2>Account Details</h2>
-                    <p>Username: {account.name}</p>
-                    <p>Reputation: {account.reputation}</p>
-                    <p>Balance: {account.balance}</p>
-                  </div>
-                )}
                 <div>
                   <h2>Recent Posts</h2>
                   {posts.map((post) => (
@@ -47,9 +44,25 @@ function App() {
               </>
             }
           />
+          <Route path="/account" element={<AccountDetails account={account} />} />
           <Route path="/post/:author/:permlink" element={<BlogPostPage />} />
         </Routes>
       </BrowserRouter>
+    </div>
+  );
+}
+
+function AccountDetails({ account }) {
+  if (!account) {
+    return <p>Loading account details...</p>;
+  }
+
+  return (
+    <div>
+      <h2>Account Details</h2>
+      <p>Username: {account.name}</p>
+      <p>Reputation: {account.reputation}</p>
+      <p>Balance: {account.balance}</p>
     </div>
   );
 }
