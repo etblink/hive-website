@@ -25,69 +25,44 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <h1>Welcome to ETBlink's Blog</h1>
+    <div className="app">
+      <h1 className="app__title">Welcome to ETBlink's Blog</h1>
       <BrowserRouter>
-        <nav>
+        <nav className="app__nav">
           <Link to="/">Home</Link>
           <span> | </span>
           <Link to="/account">Account Details</Link>
         </nav>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
+        <div className="app__container">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
                 <div className="img-container">
                   <img
                     src="https://images.pexels.com/photos/811838/pexels-photo-811838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                     alt=""
                   />
                 </div>
-                <div className="app-container">
-                  <Sidebar posts={allPosts} />
-                  <div className="posts-container">
-                    <h2 className="posts-title">
+                  <div className="posts-container app__posts-container">
+                    <h2 className="posts-title app__posts-title">
                       <big>Recent Posts</big>
                     </h2>
-                    <div className="post-items">
+                    <div className="post-items app__post-items">
                       {recentPosts.map((post) => (
                         <BlogPost key={post.permlink} post={post} />
                       ))}
                     </div>
                   </div>
-                </div>
-              </>
-            }
-          />
-          <Route path="/account" element={<AccountDetails account={account} />} />
-          <Route path="/post/:author/:permlink" element={<BlogPostPage />} />
-        </Routes>
+                </>
+              }
+            />
+            <Route path="/account" element={<AccountDetails account={account} />} />
+            <Route path="/post/:author/:permlink" element={<BlogPostPage />} />
+          </Routes>
+        </div>
       </BrowserRouter>
-    </div>
-  );
-}
-
-function truncateTitle(title, maxLength = 40) {
-  if (title.length > maxLength) {
-    return title.slice(0, maxLength) + '...';
-  }
-  return title;
-}
-
-function Sidebar({ posts }) {
-  return (
-    <div className="sidebar">
-      <h2>All Posts</h2>
-      <ul>
-        {posts.map((post) => (
-          <li key={post.permlink}>
-            <Link to={`/post/${post.author}/${post.permlink}`}>
-              {truncateTitle(post.title)}
-            </Link>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
@@ -98,8 +73,8 @@ function AccountDetails({ account }) {
   }
 
   return (
-    <div>
-      <h2>Account Details</h2>
+    <div className="account-details">
+      <h2 className="account-details__title">Account Details</h2>
       <p>Username: {account.name}</p>
       <p>Reputation: {account.reputation}</p>
       <p>Balance: {account.balance}</p>
@@ -107,18 +82,23 @@ function AccountDetails({ account }) {
   );
 }
 
+function truncateTitle(title, maxLength = 25) {
+  if (title.length > maxLength) {
+    return title.slice(0, maxLength) + '...';
+  }
+  return title;
+}
+
 function BlogPost({ post }) {
   return (
-    <div>
-      <h2>{truncateTitle(post.title)}</h2>
-      <p>{post.summary}</p>
-      <Link to={`/post/${post.author}/${post.permlink}`}>
+    <div className="blog-post">
+      <h2 className="blog-post__title">{truncateTitle(post.title)}</h2>
+      <p className="blog-post__summary">{post.summary}</p>
+      <Link to={`/post/${post.author}/${post.permlink}`} className="blog-post__link">
         Read more
       </Link>
     </div>
   );
 }
 
-
-export default App;
-
+export default App

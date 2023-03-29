@@ -14,7 +14,7 @@ export async function getUserAccount(username) {
   }
 }
 
-export async function fetchRecent3Posts(username, limit = 3) {
+export async function fetchRecent3Posts(username, limit = 9) {
   const db = new DatabaseAPI(client);
   try {
     const posts = await db.getDiscussions('blog', { tag: username, limit });
