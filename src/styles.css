@@ -35,7 +35,7 @@ img {
 .sidebar {
     position: absolute;
     top: 100px;
-    right: -285px;
+    right: 75px;
 }
 
 .blog-post-container {

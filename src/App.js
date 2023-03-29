@@ -68,6 +68,13 @@ function App() {
   );
 }
 
+function truncateTitle(title, maxLength = 40) {
+  if (title.length > maxLength) {
+    return title.slice(0, maxLength) + '...';
+  }
+  return title;
+}
+
 function Sidebar({ posts }) {
   return (
     <div className="sidebar">
@@ -75,7 +82,9 @@ function Sidebar({ posts }) {
       <ul>
         {posts.map((post) => (
           <li key={post.permlink}>
-            <Link to={`/post/${post.author}/${post.permlink}`}>{post.title}</Link>
+            <Link to={`/post/${post.author}/${post.permlink}`}>
+              {truncateTitle(post.title)}
+            </Link>
           </li>
         ))}
       </ul>
@@ -96,13 +105,6 @@ function AccountDetails({ account }) {
       <p>Balance: {account.balance}</p>
     </div>
   );
-}
-
-function truncateTitle(title, maxLength = 40) {
-  if (title.length > maxLength) {
-    return title.slice(0, maxLength) + '...';
-  }
-  return title;
 }
 
 function BlogPost({ post }) {
