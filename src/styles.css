@@ -63,7 +63,6 @@
   
   .posts-container {
     width: 100%;
-    /* max-width: 900px; */
 }
 
 .posts-title {
@@ -92,7 +91,6 @@
   background-repeat: no-repeat;
   border: 1px solid #ccc;
   padding: 20px;
-  /* margin-bottom: 20px; */
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -102,6 +100,7 @@
 }
 
 .blog-post:not(.blog-post:first-child) {
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.ppic.org/wp-content/uploads/close-up-of-redwood-burl-wood-grain-texture-1.jpg');
   width: 250px;
 }
   
