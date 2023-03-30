@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import { getUserAccount, fetchBlogPosts, fetchRecentPosts } from "../hive";
 import getFirstImageUrl from "../utils/getFirstImageUrl";
 
+// Custom hook to fetch posts and account information for a specified user
 export default function usePosts(username) {
+  // State variables to store account and posts data
   const [account, setAccount] = useState(null);
   const [recentPosts, setRecentPosts] = useState([]);
   const [allPosts, setAllPosts] = useState([]);
 
+  // Fetch data from Hive API when the username changes
   useEffect(() => {
     async function fetchData() {
       const accountData = await getUserAccount(username);
@@ -29,5 +32,6 @@ export default function usePosts(username) {
     fetchData();
   }, [username]);
 
+  // Return the fetched data for use in the component
   return { account, recentPosts, allPosts };
 }

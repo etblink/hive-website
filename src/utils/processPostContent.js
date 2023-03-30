@@ -1,7 +1,9 @@
 import showdown from "showdown";
 import DOMPurify from "dompurify";
 
+// Function to convert markdown content to sanitized HTML with necessary transformations
 function processPostContent(content) {
+  // Convert the markdown content to HTML using Showdown library
   const converter = new showdown.Converter();
   const htmlContent = converter.makeHtml(content);
 
@@ -20,15 +22,15 @@ function processPostContent(content) {
 
   // Add embedded videos for 3speak.tv
   const videoLinks = doc.querySelectorAll("a");
-  const processedVideoUrls = new Set(); // Add this line to store processed video URLs
+  const processedVideoUrls = new Set(); 
 
   videoLinks.forEach((link) => {
     const linkUrl = link.getAttribute("href");
     const videoRegex = /(https?:\/\/(?:www\.)?3speak\.tv\/watch\?v=[^"\s]+)/;
     const match = videoRegex.exec(linkUrl);
 
-    if (match && !processedVideoUrls.has(linkUrl)) { // Add this condition to check if the URL was already processed
-      processedVideoUrls.add(linkUrl); // Add the URL to the set of processed URLs
+    if (match && !processedVideoUrls.has(linkUrl)) { 
+      processedVideoUrls.add(linkUrl); 
       const videoId = match[1].split("=")[1].replace("/", "/"); 
       const iframe = doc.createElement("iframe");
       iframe.width = "560";
@@ -43,9 +45,10 @@ function processPostContent(content) {
     }
   });
 
-  // Sanitize the HTML content using DOMPurify
+  // Process and sanitize the HTML content using DOMPurify
   const sanitizedHtml = DOMPurify.sanitize(doc.body.innerHTML);
 
+  // Return the processed and sanitized HTML content
   return doc;
 }
 

@@ -1,7 +1,7 @@
 import { Client, DatabaseAPI } from "@hiveio/dhive";
 import getFirstImageUrl from "./utils/getFirstImageUrl";
 
-// Initialize the Hive client
+// Functions to interact with the Hive API
 const client = new Client("https://api.hive.blog");
 
 const db = new DatabaseAPI(client);
@@ -17,6 +17,7 @@ export async function getUserAccount(username) {
   }
 }
 
+// Function to fetch posts with specified limit and discussion type
 async function fetchPosts(username, limit, discussionType = "blog") {
   try {
     const posts = await db.getDiscussions(discussionType, {
@@ -30,6 +31,7 @@ async function fetchPosts(username, limit, discussionType = "blog") {
   }
 }
 
+// Functions to fetch recent and blog posts for a specified user
 export function fetchRecentPosts(username, limit = 11) {
   return fetchPosts(username, limit);
 }
@@ -38,6 +40,7 @@ export function fetchBlogPosts(username, limit = 20) {
   return fetchPosts(username, limit);
 }
 
+// Function to fetch a single post from the Hive API
 export async function getPost(author, permlink) {
   try {
     const post = await client.database.call("get_content", [author, permlink]);
@@ -47,6 +50,7 @@ export async function getPost(author, permlink) {
   }
 }
 
+// Function to fetch a single post with its first image URL
 export async function getPostWithFirstImageUrl(author, permlink) {
   const post = await getPost(author, permlink);
 

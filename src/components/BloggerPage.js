@@ -3,10 +3,11 @@ import { useParams } from "react-router-dom";
 import BlogPost from "./BlogPost";
 import usePosts from "../hooks/usePosts";
 
-
+// Component to display recent blog posts from a specified blogger
 function BloggerPage() {
+  // Get the username from the route params and fetch posts using usePosts hook
   const { username } = useParams();
-  const { account, recentPosts } = usePosts(username);
+  const { recentPosts } = usePosts(username);
 
   return (
     <div className="blogger-page">
