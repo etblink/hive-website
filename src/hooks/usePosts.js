@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getUserAccount, fetchBlogPosts, fetchRecent3Posts } from "../hive";
+import { getUserAccount, fetchBlogPosts, fetchRecentPosts } from "../hive";
 import getFirstImageUrl from "../utils/getFirstImageUrl";
 
 export default function usePosts(username) {
@@ -10,7 +10,7 @@ export default function usePosts(username) {
   useEffect(() => {
     async function fetchData() {
       const accountData = await getUserAccount(username);
-      const recentPostData = await fetchRecent3Posts(username, 9);
+      const recentPostData = await fetchRecentPosts(username, 11);
       const allPostData = await fetchBlogPosts(username);
 
       recentPostData.forEach((post) => {

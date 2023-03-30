@@ -1,4 +1,4 @@
-/* Add your custom styles here */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 
 * {
   box-sizing: border-box;
@@ -15,6 +15,10 @@ body {
   font-family: Arial, sans-serif;
 }
 
+h1, h2 {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
 h1 {
   color: #333;
 }
@@ -27,6 +31,7 @@ h2 {
   color: rgb(235, 235, 235);
   text-align: center;
   margin: 15px 0 15px 0;
+  letter-spacing: 0.2ch;
 }
 
 .app__nav {
@@ -77,16 +82,16 @@ h2 {
 }
 
 .post-items {
+  /* height: 70vh; */
   display: grid;
-  grid-template-columns: 10fr repeat(2, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: 4fr repeat(2, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   grid-gap: 30px;
 }
 
 .blog-post:first-child {
   grid-column: 1 / 2;
-  grid-row: 1 / 5;
-  /* background-image: url('https://images.pexels.com/photos/811838/pexels-photo-811838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
+  grid-row: 1 / 6;
 }
 
 .blog-post {
@@ -105,10 +110,7 @@ h2 {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
-.blog-post:not(.blog-post:first-child) {
-  /* background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.ppic.org/wp-content/uploads/close-up-of-redwood-burl-wood-grain-texture-1.jpg'); */
-  width: 250px;
-}
+
 
 .blog-post__title {
   font-size: 24px;

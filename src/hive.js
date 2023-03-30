@@ -30,7 +30,7 @@ async function fetchPosts(username, limit, discussionType = "blog") {
   }
 }
 
-export function fetchRecent3Posts(username, limit = 9) {
+export function fetchRecentPosts(username, limit = 11) {
   return fetchPosts(username, limit);
 }
 
