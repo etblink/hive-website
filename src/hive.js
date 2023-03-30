@@ -1,4 +1,6 @@
 import { Client, DatabaseAPI } from "@hiveio/dhive";
+import getFirstImageUrl from "./utils/getFirstImageUrl";
+
 
 // Initialize the Hive client
 const client = new Client("https://api.hive.blog");
@@ -44,4 +46,14 @@ export async function getPost(author, permlink) {
   } catch (error) {
     console.error("Error fetching post:", error);
   }
+}
+
+export async function getPostWithFirstImageUrl(author, permlink) {
+  const post = await getPost(author, permlink);
+
+  if (post) {
+    post.firstImageUrl = getFirstImageUrl(post.body);
+  }
+
+  return post;
 }

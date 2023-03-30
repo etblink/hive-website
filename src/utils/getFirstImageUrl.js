@@ -1,5 +1,5 @@
 function getFirstImageUrl(content) {
-    const imgRegex = /<img[^>]+src="?([^"\s]+)"?\s*\/>/g;
+    const imgRegex = /!\[[^\]]*\]\(([^)]+)\)/;
     const match = imgRegex.exec(content);
   
     if (match && match[1]) {
@@ -10,4 +10,3 @@ function getFirstImageUrl(content) {
   }
   
   export default getFirstImageUrl;
-  

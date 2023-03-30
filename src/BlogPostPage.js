@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
-import showdown from "showdown";
-import { getPost } from "./hive";
 import { useParams } from "react-router-dom";
-import DOMPurify from "dompurify";
 import processPostContent from "./utils/processPostContent";
-import "./styles.css";
+import { getPostWithFirstImageUrl } from "./hive";
+import "./components/styles.css";
 
 function BlogPostPage() {
   const { author, permlink } = useParams();
@@ -12,7 +10,7 @@ function BlogPostPage() {
 
   useEffect(() => {
     async function fetchData() {
-      const postData = await getPost(author, permlink);
+      const postData = await getPostWithFirstImageUrl(author, permlink);
       setPost(postData);
     }
 

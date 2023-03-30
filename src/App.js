@@ -5,7 +5,7 @@ import BlogPostPage from "./BlogPostPage";
 import AccountDetails from "./components/AccountDetails";
 import BlogPost from "./components/BlogPost";
 import getFirstImageUrl from "./utils/getFirstImageUrl";
-import "./styles.css";
+import "./components/styles.css";
 
 function App() {
   const [account, setAccount] = useState(null);
@@ -22,10 +22,14 @@ function App() {
       // Add imageUrl to each post object
       recentPostData.forEach((post) => {
         post.imageUrl = getFirstImageUrl(post.body);
+        console.log("recentPost content:", post.body);
+        console.log("recentPost imageUrl:", post.imageUrl);
       });
 
       allPostData.forEach((post) => {
         post.imageUrl = getFirstImageUrl(post.body);
+        console.log("allPost content:", post.body);
+        console.log("allPost imageUrl:", post.imageUrl);
       });
 
       setAccount(accountData);

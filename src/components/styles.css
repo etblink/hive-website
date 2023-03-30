@@ -80,7 +80,7 @@
 .blog-post:first-child {
   grid-column: 1 / 2;
   grid-row: 1 / 5;
-  background-image: url('https://images.pexels.com/photos/811838/pexels-photo-811838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  /* background-image: url('https://images.pexels.com/photos/811838/pexels-photo-811838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
 }
 
 .blog-post {
@@ -100,7 +100,7 @@
 }
 
 .blog-post:not(.blog-post:first-child) {
-  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.ppic.org/wp-content/uploads/close-up-of-redwood-burl-wood-grain-texture-1.jpg');
+  /* background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.ppic.org/wp-content/uploads/close-up-of-redwood-burl-wood-grain-texture-1.jpg'); */
   width: 250px;
 }
   
