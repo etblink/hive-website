@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import truncateTitle from "../utils/truncateTitle";
 
 function BlogPost({ post, index }) {
@@ -7,11 +7,26 @@ function BlogPost({ post, index }) {
     backgroundImage: post.imageUrl ? `url(${post.imageUrl})` : "none",
   };
 
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/post/${post.author}/${post.permlink}`);
+  };
+
   return (
-    <div className="blog-post" style={backgroundImageStyle}>
-      <Link to={`/post/${post.author}/${post.permlink}`}>
-        <h2 className="blog-post__title">{truncateTitle(post.title)}</h2>
-      </Link>
+    <div
+      className="blog-post"
+      style={backgroundImageStyle}
+      onClick={handleClick}
+      role="link"
+      tabIndex={index}
+      onKeyPress={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          handleClick();
+        }
+      }}
+    >
+      <h2 className="blog-post__title">{truncateTitle(post.title)}</h2>
     </div>
   );
 }

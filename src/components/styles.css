@@ -15,6 +15,15 @@ body {
   font-family: Arial, sans-serif;
 }
 
+body, html {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.app {
+  min-height: 100%;
+}
+
 h1, h2 {
   font-family: 'Roboto Condensed', sans-serif;
 }
@@ -101,6 +110,7 @@ h2 {
   background-position: center;
   background-repeat: no-repeat;
   border: 1px solid #ccc;
+  border-radius: 10px;
   padding: 20px;
   box-sizing: border-box;
   display: flex;
@@ -108,7 +118,16 @@ h2 {
   justify-content: space-between;
   color: white;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  transition: all 0.5s;
 }
+
+.blog-post:hover {
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  transform: translate(-10px, -10px);
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
 
 .blog-post__title {
   font-size: 24px;
