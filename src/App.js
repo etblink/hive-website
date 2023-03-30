@@ -1,40 +1,13 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React from "react";
 import { BrowserRouter, Route, Link, Routes } from "react-router-dom";
-import { getUserAccount, fetchBlogPosts } from "./hive";
 import BlogPostPage from "./BlogPostPage";
 import AccountDetails from "./components/AccountDetails";
 import BlogPost from "./components/BlogPost";
-import getFirstImageUrl from "./utils/getFirstImageUrl";
+import usePosts from "./hooks/usePosts";
 import "./components/styles.css";
 
 function App() {
-  const [account, setAccount] = useState(null);
-  const [recentPosts, setRecentPosts] = useState([]);
-  const [allPosts, setAllPosts] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const username = "etblink";
-      const accountData = await getUserAccount(username);
-      const recentPostData = await fetchBlogPosts(username, 9);
-      const allPostData = await fetchBlogPosts(username);
-
-      // Add imageUrl to each post object
-      recentPostData.forEach((post) => {
-        post.imageUrl = getFirstImageUrl(post.body);
-      });
-
-      allPostData.forEach((post) => {
-        post.imageUrl = getFirstImageUrl(post.body);
-      });
-
-      setAccount(accountData);
-      setRecentPosts(recentPostData);
-      setAllPosts(allPostData);
-    }
-
-    fetchData();
-  }, []);
+  const { account, recentPosts, allPosts } = usePosts("etblink");
 
   return (
     <div className="app">

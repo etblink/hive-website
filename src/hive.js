@@ -1,7 +1,6 @@
 import { Client, DatabaseAPI } from "@hiveio/dhive";
 import getFirstImageUrl from "./utils/getFirstImageUrl";
 
-
 // Initialize the Hive client
 const client = new Client("https://api.hive.blog");
 

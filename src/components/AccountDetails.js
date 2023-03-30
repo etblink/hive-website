@@ -12,7 +12,7 @@ function AccountDetails({ account }) {
       <p>Reputation: {account.reputation}</p>
       <p>Balance: {account.balance}</p>
     </div>
-);
+  );
 }
 
 export default AccountDetails;
