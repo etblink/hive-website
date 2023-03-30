@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import processPostContent from "./utils/processPostContent";
 import { getPostWithFirstImageUrl } from "./hive";
 
@@ -40,7 +40,7 @@ function BlogPostPage() {
       {post ? (
         <>
           <h1 className="blog-post-page__title">{post.title}</h1>
-          <p className="blog-post-page__author">By {post.author}</p>
+          <p className="blog-post-page__author">By <Link to={`/blogger-profile/${post.author}`}>{post.author}</Link></p>
           <div className="blog-post-page__content" ref={contentRef} />
         </>
       ) : (

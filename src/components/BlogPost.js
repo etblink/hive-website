@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import truncateTitle from "../utils/truncateTitle";
 
 // Component to display a single blog post with a background image and a truncated title
@@ -11,12 +11,12 @@ function BlogPost({ post, index }) {
 
   const navigate = useNavigate();
 
-   // Navigate to the post page when the blog post is clicked
+  // Navigate to the post page when the blog post is clicked
   const handleClick = () => {
     navigate(`/post/${post.author}/${post.permlink}`);
   };
 
-  // Render the blog post component with the background image and truncated title
+  // Render the blog post component with the background image, truncated title, and clickable author name
   return (
     <div
       className="blog-post"
@@ -31,6 +31,7 @@ function BlogPost({ post, index }) {
       }}
     >
       <h2 className="blog-post__title">{truncateTitle(post.title)}</h2>
+      <p className="blog-post__author">By {post.author}</p>
     </div>
   );
 }
