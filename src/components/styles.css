@@ -256,4 +256,5 @@ h2 {
   position: absolute;
   right: 30px;
   bottom: 20px;
+  z-index: -100;
 }
