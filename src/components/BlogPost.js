@@ -6,8 +6,6 @@ function BlogPost({ post, index }) {
     backgroundImage: post.imageUrl ? `url(${post.imageUrl})` : "none",
   };
 
-  console.log("backgroundImageStyle:", backgroundImageStyle);
-
   function truncateTitle(title, maxLength = 30) {
     if (title.length > maxLength) {
       return title.slice(0, maxLength) + "...";
