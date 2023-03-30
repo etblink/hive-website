@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter, Route, Link, Routes } from "react-router-dom";
 import BlogPostPage from "./BlogPostPage";
-import AccountDetails from "./components/AccountDetails";
 import BlogPost from "./components/BlogPost";
+import BloggerPage from "./components/BloggerPage";
 import usePosts from "./hooks/usePosts";
 import "./components/styles.css";
 
 function App() {
-  const { account, recentPosts, allPosts } = usePosts("etblink");
+  const { recentPosts } = usePosts("etblink");
 
   return (
     <div className="app">
@@ -16,7 +16,17 @@ function App() {
         <nav className="app__nav">
           <Link to="/">Home</Link>
           <span> | </span>
-          <Link to="/account">Account Details</Link>
+          <div className="dropdown">
+            <Link className="dropbtn" to="#">
+              Recommended Bloggers
+            </Link>
+            <div className="dropdown-content">
+              <Link to="/blogger/edicted">edicted</Link>
+              <Link to="/blogger/theycallmedan">theycallmedan</Link>
+              <Link to="/blogger/taskmaster4450">taskmaster4450</Link>
+              <Link to="/blogger/khaleelkazi">khaleelkazi</Link>
+            </div>
+          </div>
         </nav>
         <div className="app__container">
           <Routes>
@@ -38,18 +48,22 @@ function App() {
                 </>
               }
             />
-            <Route
-              path="/account"
-              element={<AccountDetails account={account} />}
-            />
             <Route path="/post/:author/:permlink" element={<BlogPostPage />} />
+            <Route
+              path="/blogger/:username"
+              element={<BloggerPage />}
+            />
           </Routes>
         </div>
       </BrowserRouter>
       <div class="hive-icon">
-      <img src="https://hive.blog/images/hive-blog-logo.svg" alt="hive logo" width="150px" />
+        <img
+          src="https://hive.blog/images/hive-blog-logo.svg"
+          alt="hive logo"
+          width="150px"
+        />
+      </div>
     </div>
-    </div>    
   );
 }
 
