@@ -10,6 +10,10 @@ a {
   text-decoration: none;
 }
 
+p {
+
+}
+
 body {
   background-color: #383838;
   font-family: Arial, sans-serif;
@@ -244,6 +248,10 @@ h2 {
   word-break: break-word;
 }
 
+.blog-post-page__content p {
+  background-color: #f5f5f5;
+}
+
 .blog-post-page__content img {
   max-width: 100%;
   height: auto;
@@ -304,7 +312,9 @@ h2 {
 }
 
 .dropdown-content a:hover {
-  background-color: #f1f1f1;
+  background-color: #686868;
+  color: #f5f5f5;
+  text-decoration: none;
 }
 
 .dropdown:hover .dropdown-content {

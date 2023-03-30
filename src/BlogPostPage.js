@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useParams } from "react-router-dom";
 import processPostContent from "./utils/processPostContent";
 import { getPostWithFirstImageUrl } from "./hive";
-import "./components/styles.css";
 
 function BlogPostPage() {
   const { author, permlink } = useParams();
   const [post, setPost] = useState(null);
+  const contentRef = useRef();
 
   useEffect(() => {
     async function fetchData() {
@@ -23,16 +23,20 @@ function BlogPostPage() {
     }
   }, [post]);
 
+  useEffect(() => {
+    if (sanitizedPostContent) {
+      contentRef.current.innerHTML = "";
+      contentRef.current.appendChild(sanitizedPostContent.body);
+    }
+  }, [sanitizedPostContent]);
+
   return (
     <div className="blog-post-page">
       {post ? (
         <>
           <h1 className="blog-post-page__title">{post.title}</h1>
           <p className="blog-post-page__author">By {post.author}</p>
-          <div
-            className="blog-post-page__content"
-            dangerouslySetInnerHTML={{ __html: sanitizedPostContent }}
-          />
+          <div className="blog-post-page__content" ref={contentRef} />
         </>
       ) : (
         <p>Loading...</p>

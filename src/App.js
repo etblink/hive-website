@@ -56,7 +56,7 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
-      <div class="hive-icon">
+      <div className="hive-icon">
         <img
           src="https://hive.blog/images/hive-blog-logo.svg"
           alt="hive logo"
