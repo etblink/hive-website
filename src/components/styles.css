@@ -10,10 +10,6 @@ a {
   text-decoration: none;
 }
 
-p {
-
-}
-
 body {
   background-color: #383838;
   font-family: Arial, sans-serif;
@@ -253,7 +249,7 @@ h2 {
   word-break: break-word;
 }
 
-.blog-post-page__content p {
+.blog-post-page__content p, .blog-post-page__content h4, .blog-post-page__content h5, .blog-post-page__content h6 {
   background-color: #f5f5f5;
 }
 
