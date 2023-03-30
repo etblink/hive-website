@@ -5,7 +5,6 @@ ETBlink's Blog is a simple web app built using React that demonstrates how to fe
 ## Features
 
 - Display recent blog posts on the homepage
-- List all blog posts in the sidebar
 - Show user account details
 - Display individual blog post content
 - Mobile-responsive design
