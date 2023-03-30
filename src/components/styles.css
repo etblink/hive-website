@@ -100,6 +100,12 @@ h2 {
   grid-gap: 30px;
 }
 
+.post-items-wrapper {
+  overflow-y: auto;
+  /* Set a maximum height for smaller screens */
+  max-height: calc(100vh - 150px); /* Adjust the value 150px according to your header/footer height */
+}
+
 .blog-post:first-child {
   grid-column: 1 / 2;
   grid-row: 1 / 6;

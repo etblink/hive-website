@@ -37,6 +37,7 @@ function App() {
               element={
                 <>
                   <div className="posts-container app__posts-container">
+                  <div className="post-items-wrapper">
                     <div className="post-items app__post-items">
                       {recentPosts.map((post, index) => (
                         <BlogPost
@@ -45,6 +46,7 @@ function App() {
                           index={index}
                         />
                       ))}
+                    </div>
                     </div>
                   </div>
                 </>
