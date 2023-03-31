@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Link, Routes } from "react-router-dom";
 import BlogPostPage from "./BlogPostPage";
 import BlogPost from "./components/BlogPost";
 import BloggerPage from "./components/BloggerPage";
+import BloggerProfile from "./components/BloggerProfile"; // Import the BloggerProfile component
 import usePosts from "./hooks/usePosts";
 import "./components/styles.css";
 
@@ -57,6 +58,7 @@ function App() {
               path="/blogger/:username"
               element={<BloggerPage />}
             />
+            <Route path="/blogger-profile/:username" element={<BloggerProfile />} /> {/* Add the new route for BloggerProfile */}
           </Routes>
         </div>
       </BrowserRouter>

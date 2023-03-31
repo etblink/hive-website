@@ -432,3 +432,7 @@ h2 {
 .blog-post-page__author a:hover {
   color: #333;
 }
+
+.blogger-profile__image {
+  width: 150px;
+}
