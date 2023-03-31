@@ -1,5 +1,5 @@
-import React from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import truncateTitle from "../utils/truncateTitle";
 
 // Component to display a single blog post with a background image and a truncated title
@@ -10,6 +10,23 @@ function BlogPost({ post, index }) {
   };
 
   const navigate = useNavigate();
+  const blogPostRef = useRef(null);
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        handleClick();
+      }
+    };
+
+    const blogPostElement = blogPostRef.current;
+    blogPostElement.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      blogPostElement.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   // Navigate to the post page when the blog post is clicked
   const handleClick = () => {
@@ -24,11 +41,7 @@ function BlogPost({ post, index }) {
       onClick={handleClick}
       role="link"
       tabIndex={index}
-      onKeyPress={(event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          handleClick();
-        }
-      }}
+      ref={blogPostRef}
     >
       <h2 className="blog-post__title">{truncateTitle(post.title)}</h2>
       <p className="blog-post__author">By {post.author}</p>

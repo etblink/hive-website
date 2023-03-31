@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Link, Routes } from "react-router-dom";
-import BlogPostPage from "./BlogPostPage";
+import BlogPostPage from "./components/BlogPostPage";
 import BlogPost from "./components/BlogPost";
 import BloggerPage from "./components/BloggerPage";
 import BloggerProfile from "./components/BloggerProfile"; // Import the BloggerProfile component
