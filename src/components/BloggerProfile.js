@@ -23,12 +23,14 @@ function BloggerProfile() {
   const postingMetadata = JSON.parse(account.posting_json_metadata);
   console.log("Posting metadata:", postingMetadata); // Debugging
   const profileImage = postingMetadata.profile.profile_image || "https://developers.hive.io/images/sticker.png";
+  const profileAbout = postingMetadata.profile.about;
+  console.log(profileAbout);
 
   return (
     <div className="blogger-profile">
       <img className="blogger-profile__image" src={profileImage} alt={`${username}'s profile`} />
       <h2>About this Author</h2>
-      <p>This section is to be filled in later.</p>
+      <p>{profileAbout}</p>
     </div>
   );
 }
