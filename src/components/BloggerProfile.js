@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getUserAccount } from "../hive";
 
 function BloggerProfile() {
@@ -28,7 +28,7 @@ function BloggerProfile() {
 
   return (
     <div className="blogger-profile">
-      <img className="blogger-profile__image" src={profileImage} alt={`${username}'s profile`} />
+      <Link to={`/blogger/${username}`}><img className="blogger-profile__image" src={profileImage} alt={`${username}'s profile`} /></Link>
       <h2>About this Author</h2>
       <p>{profileAbout}</p>
     </div>

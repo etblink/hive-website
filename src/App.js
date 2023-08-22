@@ -10,7 +10,7 @@ import "./components/styles.css";
 // Main application component that renders navigation and routes
 function App() {
   // Fetch recent posts from the specified user using the usePosts hook
-  const { recentPosts } = usePosts("etblink");
+  const { recentPosts } = usePosts("hive-167922");
 
   return (
     <div className="app">

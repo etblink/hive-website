@@ -2,7 +2,7 @@ import { Client, DatabaseAPI } from "@hiveio/dhive";
 import getFirstImageUrl from "./utils/getFirstImageUrl";
 
 // Functions to interact with the Hive API
-const client = new Client("https://api.hive.blog");
+const client = new Client("https://anyx.io");
 
 const db = new DatabaseAPI(client);
 
@@ -18,17 +18,20 @@ export async function getUserAccount(username) {
 }
 
 // Function to fetch posts with specified limit and discussion type
-async function fetchPosts(username, limit, discussionType = "blog") {
-  try {
-    const posts = await db.getDiscussions(discussionType, {
-      tag: username,
-      limit,
-    });
-    return posts;
-  } catch (error) {
-    console.error(`Error fetching ${discussionType} posts:`, error);
-    return [];
+async function fetchPosts(username, limit, discussionTypes = ["created", "blog"]) {
+  let allPosts = [];
+  for (let discussionType of discussionTypes) {
+    try {
+      const posts = await db.getDiscussions(discussionType, {
+        tag: username,
+        limit: limit,
+      });
+      allPosts = allPosts.concat(posts);
+    } catch (error) {
+      console.error(`Error fetching ${discussionType} posts:`, error);
+    }
   }
+  return allPosts;
 }
 
 // Functions to fetch recent and blog posts for a specified user
