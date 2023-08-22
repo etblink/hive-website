@@ -21,7 +21,7 @@ body p, body li, body h2, body h3, body center {
 
 body,
 html {
-  overflow-y: auto;
+  overflow-y: hidden;
   height: 100%;
 }
 
@@ -106,8 +106,7 @@ h2 {
 
 .post-items-wrapper {
   overflow-y: auto;
-  /* max-height: calc(100vh - 150px);  */
-  max-height: 100vh;
+  max-height: calc(100vh - 150px); 
 }
 
 .blog-post:first-child {
@@ -370,6 +369,7 @@ h2 {
 .blogger-page {
   width: 100%;
   padding: 0 20px;
+  
 }
 
 .blogger-page__title {
