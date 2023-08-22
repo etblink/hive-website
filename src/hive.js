@@ -18,7 +18,7 @@ export async function getUserAccount(username) {
 }
 
 // Function to fetch posts with specified limit and discussion type
-async function fetchPosts(username, limit, discussionTypes = ["created", "blog"]) {
+async function fetchPosts(username, limit, discussionTypes = ["trending", "blog"]) {
   let allPosts = [];
   for (let discussionType of discussionTypes) {
     try {
