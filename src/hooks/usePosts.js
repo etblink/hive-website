@@ -13,7 +13,7 @@ export default function usePosts(username) {
   useEffect(() => {
     async function fetchData() {
       const accountData = await getUserAccount(username);
-      const recentPostData = await fetchRecentPosts(username, 11);
+      const recentPostData = await fetchRecentPosts(username, 50);
       const allPostData = await fetchBlogPosts(username);
 
       recentPostData.forEach((post) => {

@@ -13,10 +13,12 @@ function BloggerPage() {
     <div className="blogger-page">
       <h2 className="blogger-page__title"><Link to={`/blogger-profile/${username}`}>Posts by {username}</Link></h2>
       <div className="posts-container blogger-page__posts-container">
+      <div className="post-items-wrapper">
         <div className="post-items blogger-page__post-items">
           {recentPosts.map((post, index) => (
             <BlogPost key={post.permlink} post={post} index={index} />
           ))}
+        </div>
         </div>
       </div>
     </div>

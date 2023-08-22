@@ -35,11 +35,11 @@ async function fetchPosts(username, limit, discussionTypes = ["trending", "blog"
 }
 
 // Functions to fetch recent and blog posts for a specified user
-export function fetchRecentPosts(username, limit = 11) {
+export function fetchRecentPosts(username, limit = 50) {
   return fetchPosts(username, limit);
 }
 
-export function fetchBlogPosts(username, limit = 20) {
+export function fetchBlogPosts(username, limit = 50) {
   return fetchPosts(username, limit);
 }
 
