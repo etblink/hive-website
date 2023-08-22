@@ -20,10 +20,16 @@ function BloggerProfile() {
   }
 
   // Extract the profile image from the posting_json_metadata
-  const postingMetadata = JSON.parse(account.posting_json_metadata);
+  let postingMetadata = {};
+  try {
+      postingMetadata = JSON.parse(account.posting_json_metadata || "{}");
+  } catch (error) {
+      console.error("Error parsing posting_json_metadata:", error);
+  }
   console.log("Posting metadata:", postingMetadata); // Debugging
-  const profileImage = postingMetadata.profile.profile_image || "https://developers.hive.io/images/sticker.png";
-  const profileAbout = postingMetadata.profile.about;
+  
+  const profileImage = postingMetadata.profile?.profile_image || "https://developers.hive.io/images/sticker.png";
+  const profileAbout = postingMetadata.profile?.about || "";
   console.log(profileAbout);
 
   return (
